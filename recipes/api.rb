@@ -38,6 +38,10 @@ if node["glance"]["api"]["default_store"] == "file"
   end
 end
 
+if node.recipe?('ceilometer::ceilometer-setup')
+    node.set["glance"]["api"]["notifier_strategy"] = "rabbit"
+end
+
 include_recipe "glance::glance-rsyslog"
 include_recipe "monitoring"
 
